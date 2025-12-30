@@ -1,7 +1,1 @@
-export const Archive = () => {
-  return (
-    <div className="fs">
-      <h1>Archive</h1>
-    </div>
-  )
-}
+export { ArchiveView as Archive } from '@/components/ArchiveView'
