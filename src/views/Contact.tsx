@@ -9,10 +9,10 @@ export const Contact = () => {
         </p>
         <div className="flex flex-col items-center gap-8">
           <a
-            href="mailto:hello@strikemedia.com"
+            href="mailto:hello@strikemedia.xyz"
             className="text-xl md:text-2xl font-bold hover:text-white transition-colors duration-300 tracking-tighter"
           >
-            HELLO@STRIKEMEDIA.COM
+            HELLO@STRIKEMEDIA.XYZ
           </a>
           <a
             href="https://check.so"
