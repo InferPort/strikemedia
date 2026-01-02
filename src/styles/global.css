@@ -188,7 +188,15 @@ body {
   gap: 1rem;
 }
 
-.menu-list button {
+.nav-separator {
+  height: 1px;
+  width: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0.25rem 0;
+}
+
+.menu-list button,
+.menu-btn-link {
   background: none;
   border: none;
   color: var(--secondary);
@@ -199,9 +207,12 @@ body {
   transition: var(--transition);
   position: relative;
   width: fit-content;
+  text-decoration: none;
+  display: block;
 }
 
-.menu-list button::after {
+.menu-list button::after,
+.menu-btn-link::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -212,17 +223,21 @@ body {
   transition: var(--transition);
 }
 
-.menu-list button:hover {
+.menu-list button:hover,
+.menu-btn-link:hover {
   color: white;
   padding-left: 0.5rem;
 }
 
 .menu-list button:hover::after,
-.menu-list button.active::after {
+.menu-list button.active::after,
+.menu-btn-link:hover::after,
+.menu-btn-link.active::after {
   width: 100%;
 }
 
-.menu-list button.active {
+.menu-list button.active,
+.menu-btn-link.active {
   color: white;
 }
 
