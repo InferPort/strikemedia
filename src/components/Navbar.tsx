@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { SocialLinks } from './SocialLinks'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
+    if (location.pathname !== '/') return
+
     const handleScroll = () => {
       const sections = ['home', 'artists', 'archive', 'contact']
       const current = sections.find(section => {
@@ -21,9 +26,15 @@ export const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [location.pathname])
 
   const scrollTo = (id: string) => {
+    if (location.pathname !== '/') {
+      navigate('/#' + id)
+      setIsOpen(false)
+      return
+    }
+
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
@@ -53,7 +64,7 @@ export const Navbar = () => {
             <li>
               <button
                 onClick={() => scrollTo('home')}
-                className={activeSection === 'home' ? 'active' : ''}
+                className={activeSection === 'home' && location.pathname === '/' ? 'active' : ''}
               >
                 inicio
               </button>
@@ -61,7 +72,7 @@ export const Navbar = () => {
             <li>
               <button
                 onClick={() => scrollTo('artists')}
-                className={activeSection === 'artists' ? 'active' : ''}
+                className={activeSection === 'artists' && location.pathname === '/' ? 'active' : ''}
               >
                 artistas
               </button>
@@ -69,7 +80,7 @@ export const Navbar = () => {
             <li>
               <button
                 onClick={() => scrollTo('archive')}
-                className={activeSection === 'archive' ? 'active' : ''}
+                className={activeSection === 'archive' && location.pathname === '/' ? 'active' : ''}
               >
                 archivo
               </button>
@@ -77,10 +88,20 @@ export const Navbar = () => {
             <li>
               <button
                 onClick={() => scrollTo('contact')}
-                className={activeSection === 'contact' ? 'active' : ''}
+                className={activeSection === 'contact' && location.pathname === '/' ? 'active' : ''}
               >
                 contacto
               </button>
+            </li>
+            <li className="nav-separator"></li>
+            <li>
+              <Link
+                to="/wavevault"
+                className={`menu-btn-link ${location.pathname === '/wavevault' ? 'active' : ''}`}
+                onClick={() => setIsOpen(false)}
+              >
+                WaveVault
+              </Link>
             </li>
           </ul>
 

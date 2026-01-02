@@ -1,9 +1,24 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Navbar } from '@/components/Navbar'
 import { ArtistsView as Artists } from '@/components/ArtistsView'
 import { ArchiveView as Archive } from '@/components/ArchiveView'
 import { Contact } from '@/views/Contact'
 
 export const Home = () => {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '')
+      const element = document.getElementById(id)
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
+      }
+    }
+  }, [location.hash])
   return (
     <div className="scroll-container">
       <Navbar />
